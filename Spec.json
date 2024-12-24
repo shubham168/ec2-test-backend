@@ -1,0 +1,104 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "API Example",
+    "description": "A simple API with example endpoints",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000/"
+    }
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "summary": "Home endpoint",
+        "operationId": "getHome",
+        "responses": {
+          "200": {
+            "description": "A simple response for the root endpoint",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Welcome to the API!"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/": {
+      "get": {
+        "summary": "Get a list of users",
+        "operationId": "getUsers",
+        "responses": {
+          "200": {
+            "description": "A list of users",
+            "content": {
+              "application/json": {
+                "example": [
+                  {
+                    "id": 1,
+                    "name": "John Doe",
+                    "email": "john.doe@example.com"
+                  },
+                  {
+                    "id": 2,
+                    "name": "Jane Smith",
+                    "email": "jane.smith@example.com"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new user",
+        "operationId": "createUser",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  }
+                },
+                "required": ["name", "email"]
+              },
+              "example": {
+                "name": "New User",
+                "email": "new.user@example.com"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "User created successfully",
+            "content": {
+              "application/json": {
+                "example": {
+                  "id": 3,
+                  "name": "New User",
+                  "email": "new.user@example.com"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    }
+  }
+}
